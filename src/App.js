@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import Expense from './components/Expense';
+import expenses from './data';
 
 function App() {
+  const total = expenses.reduce((total, expense) => {return total + expense.price}, 0);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>Expense Tracker</h1>
+      </div>
+      {expenses.map((expense) => {
+        return (
+          <Expense key={expense.id} name={expense.name} price={expense.price} />
+        );
+      })}
+      <div>
+        <b>TOTAL: </b>
+        {total}
+      </div>
     </div>
   );
 }
